@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE form-validation PUBLIC
+          "-//Apache Software Foundation//DTD Commons Validator Rules Configuration 1.1.3//EN"
+          "http://jakarta.apache.org/commons/dtds/validator_1_1_3.dtd">
+
+<form-validation>
+
+<!--
+     This is a minimal Validator form file with a couple of examples.
+-->
+
+    <global>
+
+        <!-- An example global constant
+        <constant>
+            <constant-name>postalCode</constant-name>
+            <constant-value>^\d{5}\d*$</constant-value>
+        </constant>
+        end example-->
+
+    </global>
+
+    <formset>
+
+	<form name="ValidatorFormBean">
+
+		<field property="userName" depends="required,mask,minlength,maxlength">
+			<arg0 key="loginForm.username" />
+			<arg1 key="${var:minlength}" resource="false" />
+			<arg2 key="${var:maxlength}" resource="false" />
+			<var>
+				<var-name>minlength</var-name>
+				<var-value>3</var-value>
+			</var>
+			<var>
+				<var-name>maxlength</var-name>
+				<var-value>10</var-value>
+			</var>
+			<var>
+				<var-name>mask</var-name>
+				<var-value>^[a-zA-Z]*$</var-value>
+			</var>
+		</field>
+		<!-- 
+		<field property="userName" depends="maxlength">
+			<arg key="errors.maxlength" />
+			<arg0 key="loginForm.username" />
+			<arg1 key="${var:maxlength}" resource="false" />
+			<var>
+				<var-name>maxlength</var-name>
+				<var-value>10</var-value>
+			</var>
+		</field>
+		-->
+		<field property="password" depends="required,mask">
+			<arg0 key="loginForm.password" />
+			<var>
+				<var-name>mask</var-name>
+				<var-value>^[0-9a-zA-Z]*$</var-value>
+			</var>
+		</field>
+
+
+	</form>
+
+	<form name="UploadFormBean">
+
+		<field property="bname" depends="required,mask,minlength,maxlength">
+			<arg0 key="loginForm.bookname" />
+			<arg1 key="${var:minlength}" resource="false" />
+			<arg2 key="${var:maxlength}" resource="false" />
+			<var>
+				<var-name>minlength</var-name>
+				<var-value>3</var-value>
+			</var>
+			<var>
+				<var-name>maxlength</var-name>
+				<var-value>10</var-value>
+			</var>
+			<var>
+				<var-name>mask</var-name>
+				<var-value>^[a-zA-Z]*$</var-value>
+			</var>
+		</field>
+	
+		<field property="aname" depends="required,mask">
+			<arg0 key="loginForm.authorname" />
+			<var>
+				<var-name>mask</var-name>
+				<var-value>^[0-9a-zA-Z]*$</var-value>
+			</var>
+		</field>
+		
+			<field property="price" depends="required">
+			<arg0 key="loginForm.price" />
+			
+		</field>
+
+
+	</form>
+	
+	
+	
+    </formset>
+
+    <!-- An example formset for another locale -->
+    <formset language="fr">
+
+        <constant>
+            <constant-name>postalCode</constant-name>
+            <constant-value>^[0-9a-zA-Z]*$</constant-value>
+        </constant>
+
+        <!-- An example form -->
+        <form name="ValidatorFormBean">
+            <field
+                property="userName"
+                depends="required">
+                    <arg key="error.userName.required"/>
+            </field>
+            <field
+                property="password"
+                depends="required,mask">
+                    <arg key="error.password.required"/>
+                    <var>
+                        <var-name>mask</var-name>
+                        <var-value>^[0-9a-zA-Z]*$</var-value>
+                    </var>
+            </field>
+        </form>
+
+   </formset>
+
+</form-validation>

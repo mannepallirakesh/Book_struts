@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_2.dtd">
+
+
+<struts-config>
+  
+    <form-beans>
+    
+    <form-bean name="ValidatorFormBean" type="com.training.ValidatorFormTestForm"/>
+    <form-bean name="UploadFormBean" type="com.training.UploadFormTestForm"/>
+    <form-bean name="UpdateFormBean" type="com.training.UpdateFormTestForm"/>
+       
+     </form-beans>
+    
+    <global-forwards>
+      	<forward name="failure" path="/jsps/Failure.jsp" />
+    </global-forwards>
+  
+   <action-mappings>
+   
+   <action path="/ValidatorForm"  scope="session" validate="true" type="com.training.ValidatorFormTestAction" input="/jsps/ValidatorFormLogin.jsp" name="ValidatorFormBean">
+            <forward name="success" path="/jsps/Success.jsp" />
+            <forward name="failure" path="/jsps/Failure.jsp" />
+        </action>
+        
+        <action path="/UploadForm"  scope="session" validate="true" type="com.training.UploadFormTestAction" input="/jsps/Success.jsp" name="UploadFormBean">
+            <forward name="success" path="/jsps/Success.jsp" />
+            <forward name="failure" path="/jsps/Failure.jsp" />
+        </action>
+        
+         <action path="/UpdateForm"  scope="session" validate="true" type="com.training.UpdateFormTestAction" input="/jsps/Success.jsp" name="UpdateFormBean">
+            <forward name="success" path="/jsps/Success.jsp" />
+            <forward name="failure" path="/jsps/Failure.jsp" />
+        </action>
+        
+ 
+    </action-mappings>
+    
+	<controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>
+	
+    <message-resources parameter="ApplicationResource" null="false"/>
+    
+      <!-- ========================= Tiles plugin ================================= -->
+      
+    <plug-in className="org.apache.struts.tiles.TilesPlugin" >
+        <set-property property="definitions-config" value="/WEB-INF/tiles-defs.xml" />
+        <set-property property="moduleAware" value="true" />
+    </plug-in>
+    
+        <!-- ========================= Validator plugin ================================= -->
+        
+    <plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+        <set-property
+            property="pathnames"
+            value="/WEB-INF/validator-rules.xml,/WEB-INF/validation.xml"/>
+    </plug-in>
+    
+
+</struts-config>
